@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+vector<int> findDuplicates(vector<int>& nums) {
+    vector<int> duplicates;
+
+    for (int num : nums) {
+        // Mark the element as visited
+        int index = abs(num) - 1;
+        if (nums[index] < 0) {
+            // If the element is already negative, it means it has appeared before
+            duplicates.push_back(abs(num));
+        } else {
+            // Mark the element as visited by making it negative
+            nums[index] *= -1;
+        }
+    }
+
+    return duplicates;
+}
+
+int main() {
+    vector<int> nums = {4, 3, 2, 7, 8, 2, 3, 1};
+    vector<int> duplicates = findDuplicates(nums);
+
+    cout << "Duplicates: ";
+    for (int num : duplicates) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
